@@ -1,0 +1,47 @@
+//Подключение шрифта
+@mixin font($font_name, $file_name, $weight, $style) {
+    @font-face {
+    font-family: $font_name;
+    font-display: swap;
+    src: url("../fonts/#{$file_name}.woff") format("woff"), url("../fonts/#{$file_name}.woff2") format("woff2");
+    font-weight: #{$weight};
+    font-style: #{$style};
+    }
+}
+
+//Адаптивный шрифт
+@mixin adaptiv-font($pcSize, $mobSize) {
+    $addSize: $pcSize - $mobSize;
+    $maxWidth: $maxWidth - 320;
+    font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth}));
+}
+
+//Адаптивное свойтво
+@mixin adaptiv-value($propertry, $startSize, $minSize, $type) {
+    $addSize: $startSize - $minSize;
+    @if $type==1{
+        //Если меньше контейнера
+        #{$propertry}: $startSize + px;
+        @media (max-width: #{$maxWidthContainer + px}) {
+            #{$propertry}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+        }
+    } @else if $type==2 {
+        //Если больше контейнера
+        #{$propertry}: $startSize + px;
+        @media (min-width: #{$maxWidthContainer + px}) {
+            #{$propertry}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+        }
+    } @else {
+        //Всегда
+        #{$propertry}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+}
+
+//Плейсхолдер
+@mixin input-placeholder {
+    &.placeholder { @content; }
+    &:-moz-placeholder { @content; }
+    &::-moz-placeholder { @content; }
+    &:-ms-input-placeholder { @content; }
+    &::-webkit-input-placeholder { @content; }
+}

@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'arrows';
+    src:  url('fonts/arrows.eot?2aimkm');
+    src:  url('fonts/arrows.eot?2aimkm#iefix') format('embedded-opentype'),
+      url('fonts/arrows.ttf?2aimkm') format('truetype'),
+      url('fonts/arrows.woff?2aimkm') format('woff'),
+      url('fonts/arrows.svg?2aimkm#arrows') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+  }
+  
+  [class^="arrows-"], [class*=" arrows-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'arrows' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+  
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .arrows-arrow:before {
+    content: "\e912";
+  }

@@ -1,0 +1,94 @@
+//<КНОПКИ>
+.btn{
+    display: inline-block;
+    padding: 23.5px 40px;
+    border-radius: 35px;
+    font-size: 18px;
+    line-height: 90%;
+    letter-spacing: 0.07px; 
+    font-weight: 300;
+    color: $colorBlack;
+    border: 1px solid $colorBlack;
+    transition: background-color 0.5s, color 0.5s;
+    &:hover{
+        background-color: $colorBlack;
+        color: $colorBg;
+    }
+}
+//<КНОПКИ>
+
+// <УЧАСТКИ>
+
+.places{
+    &__area{
+        margin: 0 auto;
+    }
+    &__area-bd{
+        position: absolute;
+        transform: translate(-50%, -50%) scale(1.45);
+        left: 50%;
+        top: 60%;
+    }
+    .items{
+        position: absolute;
+        background-color: red;
+        transform: translate(-50%, -50%);
+    }
+    &__one{
+        width: 193px;
+        height: 80px;
+        clip-path: polygon(100% 10%, 96% 59%, 63% 97%, 18% 100%, 0 0);
+    }
+    &__two{
+        width: 133px;
+        height: 161px;
+        clip-path: polygon(67% 17%, 100% 0, 68% 100%, 0 100%, 10% 17%);
+    }
+    &__three{
+        width: 145px;
+        height: 158px;
+        clip-path: polygon(30% 0, 100% 0, 81% 100%, 0 70%);
+    }
+    &__four{
+        width: 177px;
+        height: 155px;
+        clip-path: polygon(41% 0, 100% 27%, 85% 100%, 25% 88%, 0 29%);
+    }
+    &__five{
+        width: 134px;
+        height: 187px;
+        clip-path: polygon(25% 0, 100% 15%, 78% 100%, 0 48%);
+    }
+    &__six{
+        width: 149px;
+        height: 172px;
+        clip-path: polygon(60% 1%, 99% 53%, 76% 100%, 0 34%);
+    }
+    &__seven{
+        width: 185px;
+        height: 205px;
+        clip-path: polygon(54% 0, 100% 78%, 57% 100%, 28% 94%, 0 66%);
+    }
+    &__eight{
+        width: 195px;
+        height: 196px;
+        clip-path: polygon(14% 0, 100% 33%, 76% 82%, 38% 100%, 0 16%);
+    }
+    &__nine{
+        width: 185px;
+        height: 105px;
+        clip-path: polygon(0 0, 79% 6%, 100% 100%, 6% 100%);
+    }
+    &__ten{
+        width: 196px;
+        height: 182px;
+        clip-path: polygon(21% 0, 89% 5%, 100% 100%, 0 74%);
+    }
+    &__eleven{
+        width: 235px;
+        height: 232px;
+        clip-path: polygon(20% 0, 100% 22%, 39% 100%, 0 64%);
+    }
+}
+
+// <УЧАСТКИ>
