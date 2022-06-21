@@ -89,6 +89,15 @@ const places = {
     item: document.querySelectorAll('.places-item'),
     title: document.querySelector('.places__title h2 span')
 },
+    newHome = {
+        content: [
+            "Minercraft",
+            "Dota 2",
+            "Apex",
+            "Warzone",
+            "Point Blank"
+        ]
+},
     origins = {
         main: document.querySelector('.origins')
 },
@@ -103,21 +112,18 @@ const places = {
         li: document.querySelectorAll('.home__list li'),
         form: document.querySelector('.home__form'),
         input: document.querySelector('.home__form input'),
-        button: document.querySelector('.home__form button'),
-
-},  newHome = {
-        content: [
-            "Minercraft",
-            "Dota 2",
-            "Apex",
-            "Warzone",
-            "Point Blank"
-    ]
+        button: document.querySelector('.home__form button')
 }
 
-places.item.forEach((el) => {
-    el.remove()
-})
+const removeEl = el => {
+    if(el.length > 1){
+        el.forEach((el)=>{
+            el.remove()
+        })
+    } else {
+        el.remove();
+    }
+}
 
 places.title.textContent = 'Google'
 
@@ -136,16 +142,14 @@ home.form.addEventListener('submit', e => {
 
     if(values){
 
-        // if(values.length >= 22){
-        //     values = `${values.substring(0, 23)}...`;
-        // }
-
-        values.length >= 22 ? values = `${values.substring(0, 23)}...` : console.log('Очибка');
+        if(values.length >= 22){
+            values = `${values.substring(0, 23)}...`;
+        }
 
         newHome.content.push(values);
         newHome.content.sort();
 
-        createMovieList()
+        createMovieList(newHome.content, home.list)
 
         e.target.reset();
     } else{
@@ -153,17 +157,29 @@ home.form.addEventListener('submit', e => {
     }
 })
 
-function createMovieList(){
-    home.list.innerHTML = ''
+function createMovieList(films, parent){
+    parent.innerHTML = ''
 
-    newHome.content.forEach(el => {
-
-        home.list.innerHTML += `
+    films.forEach(el => {
+        parent.innerHTML += `
             <li>
-                ${el}    
+                ${el}
+                <div class="home__delete">
+                </div>
             </li>
         `
     })
+
+    document.querySelectorAll('.home__delete').forEach((btn, i) => {
+        btn.addEventListener("click", () => {
+            btn.parentElement.remove()
+            films.splice(i, 1)
+
+            createMovieList(films, parent)
+        })
+    })
 }
 
-createMovieList();
+// console.log(home.deleteBtn);
+removeEl(places.item)
+createMovieList(newHome.content, home.list)

@@ -739,12 +739,12 @@ li {
 }
 
 .home__list li {
+  display: flex;
   font-size: 18px;
   font-weight: 300;
   line-height: 120%;
   letter-spacing: 0.1px;
   color: #1D1F1D;
-  display: flex;
   align-items: center;
 }
 
@@ -755,6 +755,14 @@ li {
   background-color: #1D1F1D;
   margin-right: 15px;
   border-radius: 100%;
+}
+
+.home__delete {
+  width: 20px;
+  height: 20px;
+  background-color: #1D1F1D;
+  border: 1px solid red;
+  margin-left: auto;
 }
 
 .no-webp .origins {
