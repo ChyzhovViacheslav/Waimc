@@ -1,21 +1,21 @@
 // const { create } = require("browser-sync");
 // const imagemin = require("gulp-imagemin");
 
-// function testWebP(callback) {
-//     var webP = new Image();
-//     webP.onload = webP.onerror = function () {
-//         callback(webP.height == 2);
-//     };
-//     webP.src = "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA";
-// }    
-// testWebP(function (support) {
-//     if (support == true) {
-//     document.querySelector('body').classList.add('webp');
-//     }
-//     else{
-//     document.querySelector('body').classList.add('no-webp');
-//     }
-// });
+function testWebP(callback) {
+    var webP = new Image();
+    webP.onload = webP.onerror = function () {
+        callback(webP.height == 2);
+    };
+    webP.src = "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA";
+}    
+testWebP(function (support) {
+    if (support == true) {
+    document.querySelector('body').classList.add('webp');
+    }
+    else{
+    document.querySelector('body').classList.add('no-webp');
+    }
+});
 
 
 const personalMovieDB = {
@@ -183,32 +183,38 @@ function createMovieList(films, parent){
     })
 }
 
-// console.log(home.deleteBtn);
 removeEl(places.item)
 createMovieList(newHome.content, home.list)
 
-
 const tabs = document.querySelectorAll('.infstruct__list li'),
       parentTabs = document.querySelector('.infstruct__list'),
-    //   tabContent = document.querySelectorAll('.js'),
       tabContentParrent = document.querySelector('.infstruct__img')
 
-function addImg(){
+//Заглушка 
+const addImg = () => {
     for(let i = document.querySelectorAll('.js').length; i < 13; i++){
-        const img = document.createElement('img')
-        img.src = '../img/Place-one.jpg'
+        const img = document.createElement('img'),
+              picture = document.createElement('picture'),
+              source = document.createElement('source'),
+              srcImg = '../img/Place-one' //alt любое фото
+
+        img.src = `${srcImg}.jpg`
         img.classList.add('js')
-        tabContentParrent.append(img)
-        if(i >= 12) break;
+        picture.append(img)
+
+        source.srcset = `${srcImg}.webp`
+        source.type = 'image/webp'
+        picture.prepend(source)
+
+        tabContentParrent.append(picture)
     }
 }
 
 addImg()
-
+// 
 const tabContent = document.querySelectorAll('.js');
 
 function hideTabs(){
-
     tabContent.forEach(el => {
         el.classList.add('hide');
         el.classList.remove('show');
