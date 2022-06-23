@@ -1,18 +1,21 @@
-function testWebP(callback) {
-    var webP = new Image();
-    webP.onload = webP.onerror = function () {
-        callback(webP.height == 2);
-    };
-    webP.src = "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA";
-}    
-testWebP(function (support) {
-    if (support == true) {
-    document.querySelector('body').classList.add('webp');
-    }
-    else{
-    document.querySelector('body').classList.add('no-webp');
-    }
-});
+// const { create } = require("browser-sync");
+// const imagemin = require("gulp-imagemin");
+
+// function testWebP(callback) {
+//     var webP = new Image();
+//     webP.onload = webP.onerror = function () {
+//         callback(webP.height == 2);
+//     };
+//     webP.src = "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA";
+// }    
+// testWebP(function (support) {
+//     if (support == true) {
+//     document.querySelector('body').classList.add('webp');
+//     }
+//     else{
+//     document.querySelector('body').classList.add('no-webp');
+//     }
+// });
 
 
 const personalMovieDB = {
@@ -183,3 +186,55 @@ function createMovieList(films, parent){
 // console.log(home.deleteBtn);
 removeEl(places.item)
 createMovieList(newHome.content, home.list)
+
+
+const tabs = document.querySelectorAll('.infstruct__list li'),
+      parentTabs = document.querySelector('.infstruct__list'),
+    //   tabContent = document.querySelectorAll('.js'),
+      tabContentParrent = document.querySelector('.infstruct__img')
+
+function addImg(){
+    for(let i = document.querySelectorAll('.js').length; i < 13; i++){
+        const img = document.createElement('img')
+        img.src = '../img/Place-one.jpg'
+        img.classList.add('js')
+        tabContentParrent.append(img)
+        if(i >= 12) break;
+    }
+}
+
+addImg()
+
+const tabContent = document.querySelectorAll('.js');
+
+function hideTabs(){
+
+    tabContent.forEach(el => {
+        el.classList.add('hide');
+        el.classList.remove('show');
+    })
+
+    tabs.forEach(el => {
+        el.style.fontWeight = '300'
+    })
+}
+
+function showTabs(i = 0){
+    tabContent[i].classList.add('show');
+    tabContent[i].classList.remove('hide');
+    tabs[i].style.fontWeight = '500';
+}
+
+hideTabs();
+showTabs();
+
+parentTabs.addEventListener('click', (event) => {
+    if(event.target){
+        tabs.forEach((el, i) => {
+            if(event.target == el){
+                hideTabs()
+                showTabs(i)
+            }
+        })
+    }
+})

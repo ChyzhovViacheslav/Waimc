@@ -880,6 +880,7 @@ li {
   display: inline-flex;
   margin-right: 30px;
   font-weight: 300;
+  cursor: pointer;
 }
 
 .infstruct__list li:nth-child(-n+7) {
@@ -896,8 +897,23 @@ li {
   flex-direction: row;
 }
 
-.infstruct__content img {
+.infstruct .show {
+  display: inline !important;
+}
+
+.infstruct .hide {
+  display: none !important;
+}
+
+.infstruct__img {
+  width: 778px;
+  height: 448px;
   margin-right: 52px;
+}
+
+.infstruct__img img {
+  width: 100%;
+  height: 100%;
 }
 
 .infstruct__titles {
