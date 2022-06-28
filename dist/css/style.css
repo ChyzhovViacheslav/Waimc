@@ -251,6 +251,7 @@ body._lock {
 }
 
 .wrapper {
+  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
@@ -398,16 +399,23 @@ li {
           clip-path: polygon(20% 0, 100% 22%, 39% 100%, 0 64%);
 }
 
+.line {
+  z-index: 100;
+  width: 100%;
+  height: 1px;
+  background-color: #858685;
+}
+
 .header__body {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 95px;
   align-items: center;
+  flex-direction: row;
+  height: 95px;
 }
 
 .header__soc {
   margin-left: 24px;
+  flex: 0 1 33.333%;
 }
 
 .header__soc a {
@@ -422,9 +430,17 @@ li {
   color: #314C51;
 }
 
+.header__logo {
+  display: flex;
+  flex: 0 1 33.333%;
+  justify-content: center;
+}
+
 .header__side {
   display: flex;
+  justify-content: flex-end;
   align-items: center;
+  flex: 0 1 33.333%;
   margin-right: 32px;
 }
 
@@ -456,6 +472,14 @@ li {
   width: 10px;
 }
 
+.header__burger-icon {
+  display: none;
+}
+
+.second-header {
+  background-color: #F8F8F8;
+}
+
 .second-header__list {
   padding: 18px 0px;
   display: flex;
@@ -482,10 +506,10 @@ li {
   text-decoration: underline;
 }
 
-.second-header .line {
+.sticky {
+  position: fixed;
   width: 100%;
-  height: 1px;
-  background-color: #858685;
+  z-index: 999;
 }
 
 .footer {
@@ -2222,6 +2246,7 @@ li {
 
   .header__side {
     margin-right: 0px;
+    flex: 0 0 auto;
   }
 
   .header__language {
@@ -2231,10 +2256,47 @@ li {
   .header__body {
     height: auto;
     padding: 24px 0px;
+    justify-content: space-between;
   }
 
-  .second-header {
-    display: none;
+  .header__logo {
+    flex: 0 0 auto;
+    -ms-grid-column-align: start;
+        justify-self: start;
+  }
+
+  .header__burger-icon {
+    position: relative;
+    -ms-grid-column-align: end;
+        justify-self: end;
+    display: block;
+    margin-left: 26.5px;
+    width: 28px;
+    height: 16px;
+  }
+
+  .header__burger-icon::after,
+  .header__burger-icon::before {
+    position: absolute;
+    content: "";
+    left: 0;
+    height: 10%;
+    width: 100%;
+    background-color: #1D1F1D;
+  }
+
+  .header__burger-icon::after {
+    bottom: 0;
+  }
+
+  .header__burger-icon span {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: 10%;
+    width: 100%;
+    background-color: #1D1F1D;
+    transform: scale(1) translate(0px, -50%);
   }
 
   .hello .hello__content {

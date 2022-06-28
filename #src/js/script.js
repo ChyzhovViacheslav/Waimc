@@ -191,6 +191,7 @@ const tabs = document.querySelectorAll('.infstruct__list li'),
       tabContentParrent = document.querySelector('.infstruct__img')
 
 //Заглушка 
+
 const addImg = () => {
     for(let i = document.querySelectorAll('.js').length; i < 13; i++){
         const img = document.createElement('img'),
@@ -211,7 +212,9 @@ const addImg = () => {
 }
 
 addImg()
-// 
+
+// Tabs
+
 const tabContent = document.querySelectorAll('.js');
 
 function hideTabs(){
@@ -244,3 +247,48 @@ parentTabs.addEventListener('click', (event) => {
         })
     }
 })
+
+//stickyHeader
+
+const navHeader = document.querySelector('.second-header'),
+      wrapper = document.querySelector('.wrapper'),
+      navHeaderBody = document.querySelector('.second-header__body'),
+      header = document.querySelector('.header')
+
+const firstLine = document.createElement('div'),
+      secondLine = document.createElement('div');
+      firstLine.className = 'line'
+      secondLine.className = 'line'
+
+function addLine(){
+    navHeaderBody.prepend(firstLine)
+    navHeaderBody.append(secondLine)
+}
+
+addLine()
+
+function changeLine(){
+    if(navHeaderBody.contains(firstLine) && navHeaderBody.contains(secondLine)){
+        navHeaderBody.removeChild(firstLine)
+        navHeaderBody.removeChild(secondLine)
+    } else {
+        navHeader.append(firstLine)
+        navHeader.prepend(secondLine)
+    }
+}
+
+function stickyHeader(){
+    if(wrapper.scrollTop >= 95){
+        navHeader.classList.add('sticky')
+        changeLine()
+    } else if(wrapper.scrollTop <= 94){
+        navHeader.classList.remove('sticky')
+        addLine()
+    }
+}
+
+wrapper.addEventListener('scroll', stickyHeader)
+
+console.log(document.documentElement.clientWidth);
+
+//Burger
