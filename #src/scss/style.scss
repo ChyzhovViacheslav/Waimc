@@ -37,7 +37,7 @@ body {
     background-color: $colorBg;
     font-size: 14px;
     &._lock {
-        overflow: hidden;
+        overflow: hidden !important;
     }
 }
 //<ОБНУЛЯЮЩИЙ СПИСОК>==================================================================
@@ -46,11 +46,11 @@ body {
 //<ОБОЛОЧКА>====================================================================================
 .wrapper{
     position: relative;
-    width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
+    width: 100%;
+    height: 100%;
 }
 
 h1, h2, h3, h4, h5, p, span, a, li{

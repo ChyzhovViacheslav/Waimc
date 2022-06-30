@@ -17,175 +17,6 @@ testWebP(function (support) {
     }
 });
 
-
-const personalMovieDB = {
-    count: 0,
-    movies:{},
-    actors:{},
-    genres:[],
-    private: true,
-    start: () => {
-        personalMovieDB.count = +prompt("Сколько фильмов вы просмотрели?", "");
-    while (personalMovieDB.count == '' || personalMovieDB.count == null || isNaN(personalMovieDB.count)){
-        personalMovieDB.count = +prompt("Сколько фильмов вы просмотрели?", "");
-        console.log("Попробуйте ввести данные повторно");
-    };
-    },
-    rememberMyFilms: () => {
-        for(let i = 0; i < 2; i++){
-            const   a = prompt("Один из просмотренных недавно фильмов?", ""),
-                    b = +prompt("Насколько вы его оцените?", "");
-        
-            if(a != null && b !=null && a != '' && b !='' & a.length < 50){
-                personalMovieDB.movies[a] = b;
-                console.log(personalMovieDB.movies);
-            } else{ 
-                console.log('Ошибка!');
-                i--;
-            }
-        }
-    },
-    countMyFilms: () => {
-        if(personalMovieDB.count < 10){
-            console.log('Просмотренно мало фильмов');
-        } else if (personalMovieDB.count >= 10 && personalMovieDB.count < 30){
-            console.log('Вы класический зритель');
-        } else if (personalMovieDB.count >= 30){
-            console.log('ВЫ киноман');
-        } else{
-            console.log('Ошибка ёу');
-        }
-    },
-    writeYourGenres: () => {
-        for(let i = 1; i <= 3; i++){
-            let genre = prompt(`Ваш любимый жанр под номером ${i}`);
-            if(genre === '' || genre == null){
-                console.log('Вы ввели некорректные данные');
-                i--;
-            } else{
-                personalMovieDB.genres[i - 1] = genre; 
-            }
-        }
-        personalMovieDB.genres.forEach((item, i) => {
-            console.log(`Ваш любимый жанр #${i+1} - это ${item}`);
-        })
-    },
-    toggleVisibleMyDB: () => {
-        if (personalMovieDB.private){
-            personalMovieDB.private = false
-        } else {
-            personalMovieDB.private = true
-        }
-    },
-    showMyDB: () => {
-        if(personalMovieDB.private == false){
-            console.log(personalMovieDB);
-        } else if(personalMovieDB.private == true){
-            console.log("Приватность");
-        } else {
-            console.log("Ошибка Приватности");
-        }
-    }
-}
-
-const places = {
-    item: document.querySelectorAll('.places-item'),
-    title: document.querySelector('.places__title h2 span')
-},
-    newHome = {
-        content: [
-            "Minercraft",
-            "Dota 2",
-            "Apex",
-            "Warzone",
-            "Point Blank"
-        ]
-},
-    origins = {
-        main: document.querySelector('.origins')
-},
-    documents = {
-        main: document.querySelector('.documents')
-},
-    team = {
-        list: document.querySelectorAll('.team__list li')
-},
-    home = {
-        list: document.querySelector('.home__list'),
-        li: document.querySelectorAll('.home__list li'),
-        form: document.querySelector('.home__form'),
-        input: document.querySelector('.home__form input'),
-        button: document.querySelector('.home__form button')
-}
-
-const removeEl = el => {
-    if(el.length > 1){
-        el.forEach((el)=>{
-            el.remove()
-        })
-    } else {
-        el.remove();
-    }
-}
-
-places.title.textContent = 'Google'
-
-function changeBgDora (el){
-    el.style.backgroundImage = 'url(../img/dora.jpg)'
-    el.style.backgroundPosition = 'bottom'
-}
-
-changeBgDora(origins.main)
-changeBgDora(documents.main)
-
-home.form.addEventListener('submit', e => {
-    e.preventDefault();
-
-    let values = home.input.value
-
-    if(values){
-
-        if(values.length >= 22){
-            values = `${values.substring(0, 23)}...`;
-        }
-
-        newHome.content.push(values);
-        newHome.content.sort();
-
-        createMovieList(newHome.content, home.list)
-
-        e.target.reset();
-    } else{
-        console.log('Ошибка формы');
-    }
-})
-
-function createMovieList(films, parent){
-    parent.innerHTML = ''
-
-    films.forEach(el => {
-        parent.innerHTML += `
-            <li>
-                ${el}
-                <div class="home__delete">
-                </div>
-            </li>
-        `
-    })
-
-    document.querySelectorAll('.home__delete').forEach((btn, i) => {
-        btn.addEventListener("click", () => {
-            btn.parentElement.remove()
-            films.splice(i, 1)
-
-            createMovieList(films, parent)
-        })
-    })
-}
-
-removeEl(places.item)
-createMovieList(newHome.content, home.list)
-
 const tabs = document.querySelectorAll('.infstruct__list li'),
       parentTabs = document.querySelector('.infstruct__list'),
       tabContentParrent = document.querySelector('.infstruct__img')
@@ -250,10 +81,11 @@ parentTabs.addEventListener('click', (event) => {
 
 //stickyHeader
 
-const navHeader = document.querySelector('.second-header'),
+const navSecondHeader = document.querySelector('.second-header'),
       wrapper = document.querySelector('.wrapper'),
-      navHeaderBody = document.querySelector('.second-header__body'),
-      header = document.querySelector('.header')
+      navSecondHeaderBody = document.querySelector('.second-header__body'),
+      header = document.querySelector('.header'),
+      headerContainer = document.querySelector('.second-header__container')
 
 const firstLine = document.createElement('div'),
       secondLine = document.createElement('div');
@@ -261,34 +93,96 @@ const firstLine = document.createElement('div'),
       secondLine.className = 'line'
 
 function addLine(){
-    navHeaderBody.prepend(firstLine)
-    navHeaderBody.append(secondLine)
+    navSecondHeaderBody.prepend(firstLine)
+    navSecondHeaderBody.append(secondLine)
 }
 
 addLine()
 
 function changeLine(){
-    if(navHeaderBody.contains(firstLine) && navHeaderBody.contains(secondLine)){
-        navHeaderBody.removeChild(firstLine)
-        navHeaderBody.removeChild(secondLine)
+    if(navSecondHeaderBody.contains(firstLine) || navSecondHeaderBody.contains(secondLine)){
+        navSecondHeaderBody.removeChild(firstLine)
+        navSecondHeaderBody.removeChild(secondLine)
     } else {
-        navHeader.append(firstLine)
-        navHeader.prepend(secondLine)
+        navSecondHeader.append(firstLine)
+        navSecondHeader.prepend(secondLine)
     }
 }
 
-function stickyHeader(){
+function stickyNav(){
     if(wrapper.scrollTop >= 95){
-        navHeader.classList.add('sticky')
+        navSecondHeader.classList.add('sticky')
         changeLine()
     } else if(wrapper.scrollTop <= 94){
-        navHeader.classList.remove('sticky')
+        navSecondHeader.classList.remove('sticky')
         addLine()
     }
 }
 
-wrapper.addEventListener('scroll', stickyHeader)
+function stickyHeader(){
+    if(wrapper.clientWidth <= 768){
+        header.classList.add('sticky')
+    } else if(wrapper.clientWidth >= 769){
+        header.classList.remove('sticky')
+    }
+}
 
-console.log(document.documentElement.clientWidth);
+
+wrapper.addEventListener('scroll', () => {
+    stickyNav();
+    stickyHeader();
+})
 
 //Burger
+
+const burgerPlots = document.querySelector('.header__burger-plots'),
+      burgerTitle = document.querySelector('.header__burger-title'),
+      burger = document.querySelector('.header__burger'),
+      burgerParent = document.querySelector('.header__side'),
+      burgerBtn = document.querySelector('.header__burger-icon'),
+      dropDownParent = document.querySelector('.header__burger-body')
+
+function burgerShow(el){
+    el.classList.add('show')
+    el.classList.remove('hide')
+}
+
+function burgerHide(el){
+    el.classList.add('hide')
+    el.classList.remove('show')
+}
+
+function burgerListener(){
+    if(wrapper.clientWidth >= 769){
+        burgerHide(burger)
+        wrapper.style.overflowY = 'scroll'
+    }
+}
+
+burgerParent.addEventListener('click', (event) => {
+    event.preventDefault()
+    if(event.target === burgerBtn && burgerParent.contains(burgerBtn)){
+        if(burger.classList.contains('hide')){
+            burgerShow(burger)
+            wrapper.style.overflowY = 'hidden'
+        } else if(burger.classList.contains('show')){
+            burgerHide(burger)
+            wrapper.style.overflowY = 'scroll'
+        }
+    }
+})
+
+window.addEventListener('resize', burgerListener)
+
+dropDownParent.addEventListener('click', (event) => {
+    event.preventDefault()
+    if(event.target === burgerTitle && dropDownParent.contains(burgerTitle)){
+        if(burgerPlots.classList.contains('hide')){
+            burgerShow(burgerPlots)
+            burgerTitle.style.marginBottom = `${burgerPlots.clientHeight + 38}px`
+        } else if(burgerPlots.classList.contains('show')){
+            burgerHide(burgerPlots)
+            burgerTitle.style.marginBottom = '0px'
+        }
+    }
+})

@@ -247,16 +247,16 @@ body {
 }
 
 body._lock {
-  overflow: hidden;
+  overflow: hidden !important;
 }
 
 .wrapper {
   position: relative;
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+  width: 100%;
+  height: 100%;
 }
 
 h1,
@@ -399,18 +399,16 @@ li {
           clip-path: polygon(20% 0, 100% 22%, 39% 100%, 0 64%);
 }
 
-.line {
-  z-index: 100;
-  width: 100%;
-  height: 1px;
-  background-color: #858685;
+.header {
+  position: relative;
+  background-color: #F8F8F8;
 }
 
 .header__body {
   display: flex;
   align-items: center;
   flex-direction: row;
-  height: 95px;
+  padding: 16px 0px;
 }
 
 .header__soc {
@@ -506,10 +504,27 @@ li {
   text-decoration: underline;
 }
 
-.sticky {
-  position: fixed;
+.line {
+  z-index: 100;
   width: 100%;
+  height: 1px;
+  background-color: #858685;
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
   z-index: 999;
+  width: 100%;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
 }
 
 .footer {
@@ -781,14 +796,6 @@ li {
   border-radius: 100%;
 }
 
-.home__delete {
-  width: 20px;
-  height: 20px;
-  background-color: #1D1F1D;
-  border: 1px solid red;
-  margin-left: auto;
-}
-
 .no-webp .origins {
   background-image: url(../img/Wood.jpg); }
 
@@ -921,23 +928,14 @@ li {
   flex-direction: row;
 }
 
-.infstruct .show {
-  display: inline !important;
-}
-
-.infstruct .hide {
-  display: none !important;
-}
-
 .infstruct__img {
+  display: flex;
+  justify-content: center;
+  -o-object-fit: contain;
+     object-fit: contain;
   width: 778px;
   height: 448px;
   margin-right: 52px;
-}
-
-.infstruct__img img {
-  width: 100%;
-  height: 100%;
 }
 
 .infstruct__titles {
@@ -1007,6 +1005,14 @@ li {
 
 .infstruct__btns a:hover::before {
   color: #F7F4F4;
+}
+
+.infstruct .show {
+  display: inline !important;
+}
+
+.infstruct .hide {
+  display: none !important;
 }
 
 .stages__body {
@@ -2072,7 +2078,7 @@ li {
   }
 
   .infstruct .infstruct__list {
-    padding: 0px 13px;
+    padding-left: 13px;
   }
 
   .infstruct .infstruct__list li:nth-child(-n+10) {
@@ -2240,32 +2246,33 @@ li {
     padding: 0px 30px;
   }
 
-  .header__soc {
+  .header .header__soc {
     display: none;
   }
 
-  .header__side {
+  .header .header__side {
     margin-right: 0px;
     flex: 0 0 auto;
   }
 
-  .header__language {
+  .header .header__language {
     display: none;
   }
 
-  .header__body {
+  .header .header__body {
     height: auto;
     padding: 24px 0px;
     justify-content: space-between;
   }
 
-  .header__logo {
+  .header .header__logo {
     flex: 0 0 auto;
     -ms-grid-column-align: start;
         justify-self: start;
   }
 
-  .header__burger-icon {
+  .header .header__burger-icon {
+    cursor: pointer;
     position: relative;
     -ms-grid-column-align: end;
         justify-self: end;
@@ -2275,8 +2282,8 @@ li {
     height: 16px;
   }
 
-  .header__burger-icon::after,
-  .header__burger-icon::before {
+  .header .header__burger-icon::after,
+  .header .header__burger-icon::before {
     position: absolute;
     content: "";
     left: 0;
@@ -2285,11 +2292,11 @@ li {
     background-color: #1D1F1D;
   }
 
-  .header__burger-icon::after {
+  .header .header__burger-icon::after {
     bottom: 0;
   }
 
-  .header__burger-icon span {
+  .header .header__burger-icon span {
     position: absolute;
     left: 0;
     top: 50%;
@@ -2297,6 +2304,112 @@ li {
     width: 100%;
     background-color: #1D1F1D;
     transform: scale(1) translate(0px, -50%);
+  }
+
+  .header .header__burger {
+    position: absolute;
+    background-color: #F8F8F8;
+    left: 0;
+    top: 114px;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+  }
+
+  .header .header__burger-body {
+    display: inline-flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .header .header__burger-title {
+    cursor: pointer;
+    position: relative;
+    padding-right: 5px;
+    font-size: 14px;
+    line-height: 90%;
+    color: #1D1F1D;
+    font-weight: 400;
+  }
+
+  .header .header__burger-title::before {
+    position: absolute;
+    content: "";
+    left: calc(40% + 6px);
+    top: calc(50% - 2px);
+    border: 4px solid transparent;
+    border-top-color: #314C51;
+    transform: translate(-50%);
+  }
+
+  .header .header__burger-plots {
+    position: absolute;
+    top: 38px;
+    left: 0;
+  }
+
+  .header .header__burger-plots li {
+    white-space: nowrap;
+    font-size: 12px;
+    line-height: 90%;
+    font-weight: 300;
+    margin-top: 12px;
+  }
+
+  .header .header__burger-plots li:nth-child(1) {
+    margin-top: 0px;
+  }
+
+  .header .header__burger-nav {
+    margin-top: 35px;
+  }
+
+  .header .header__burger-nav li {
+    margin-top: 16px;
+  }
+
+  .header .header__burger-nav li:nth-child(1) {
+    margin-top: 0px;
+  }
+
+  .header .header__burger-soc {
+    margin-top: 62px;
+  }
+
+  .header .header__burger-soc a {
+    color: #3F3F3F;
+    font-size: 20px;
+  }
+
+  .header .header__burger-soc a:hover {
+    color: #314C51;
+  }
+
+  .header .header__burger-soc a:nth-child(1) {
+    margin-right: 24px;
+  }
+
+  .header .header__burger-assistant {
+    margin-top: 24px;
+  }
+
+  .header .header__burger-assistant h3 {
+    max-width: 160px;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 12px;
+  }
+
+  .header .header__burger-assistant .assistant-name {
+    margin-top: 8px;
+    font-weight: 300;
+    font-size: 10px;
+    line-height: 12px;
+    color: #1D1F1D;
+  }
+
+  .second-header {
+    display: none;
   }
 
   .hello .hello__content {
@@ -2434,8 +2547,12 @@ li {
     margin-bottom: 54px;
   }
 
-  .infstruct .infstruct__list li:nth-child(-n+11) {
-    margin-bottom: 19px;
+  .infstruct .infstruct__list li {
+    margin-right: 18px;
+  }
+
+  .infstruct .infstruct__list li:nth-child(-n+12) {
+    margin-bottom: 10px;
   }
 
   .infstruct .infstruct__content {
@@ -2443,7 +2560,7 @@ li {
   }
 
   .infstruct .infstruct__titles {
-    width: 320px;
+    width: 100%;
   }
 
   .infstruct .infstruct__title-cont {
@@ -2456,13 +2573,14 @@ li {
 
   .infstruct .infstruct__img {
     margin: 0px;
+    width: 100%;
   }
 
   .infstruct .infstruct__img img {
     border-radius: 15px;
     -o-object-fit: cover;
        object-fit: cover;
-    width: 320px;
+    width: 100%;
   }
 
   .stages__img-full {
@@ -2691,6 +2809,10 @@ li {
 
   .assistant__body {
     padding: 54px 0px 92px 0px;
+  }
+
+  .assistant__photo-mob img {
+    width: 100%;
   }
 
   .buildr__img-bg {
