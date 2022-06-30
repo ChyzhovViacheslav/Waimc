@@ -6,7 +6,7 @@
 <body>
     <div class="wrapper">
         <main class="plots">
-            <div class="popup" onclick="popup.click(), popup.altClick()">
+            <div class="popup close">
                 <div class="popup__body">
                     <div class="popup__logo">
                         <img src="img/popupLogo.png" alt="">
@@ -210,7 +210,7 @@
                                         <h3>Архитектор</h3>
                                         <p>Свяжитесь с архитектурным бюро. Обсудите идею вашего дома </p>
                                     </div>
-                                    <a class="steps__item-btn" id="contacts" href="#">Контакты</a>
+                                    <a data-modal class="steps__item-btn" href="#">Контакты</a>
                                 </div>
                             </div>
                             <div class="steps__item">
@@ -321,5 +321,5 @@
         </main>
         @@include('_footer.html', {})
     </div>
-    <script src="js/script.js"></script>
+    <script src="js/popup.js"></script>
 </body>

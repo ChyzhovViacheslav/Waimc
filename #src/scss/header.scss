@@ -39,6 +39,7 @@
         margin-right: 32px;
         .icon-Phone{
             font-size: 16.5px;
+            transform: scale(1);
         }
     }
 
@@ -77,6 +78,14 @@
             &__side{
                 margin-right: 0px;
                 flex: 0 0 auto;
+                .icon-Phone{
+                font-size: 16.5px;
+                transform: scale(1);
+                transition: all 0.3s ease-in-out;
+                }
+                .close{
+                    transform: scale(0);
+                }
             }
     
             &__language{
@@ -102,120 +111,146 @@
                 margin-left: 26.5px;
                 width: 28px;
                 height: 16px;
+                background-color: inherit;
                 &::after,&::before{
                     position: absolute;
+                    pointer-events: none;
                     content: '';
                     left: 0;
                     height: 10%;
                     width: 100%;
                     background-color: $colorBlack;
+                    transition: all 0.5s ease-in-out;
                 }
                 &::after{
-                    bottom: 0;
+                    bottom: 0%;
+                }
+                &::before{
+                    top: 0%;
                 }
                 span{
                     position: absolute;
+                    pointer-events: none;
                     left: 0;
                     top: 50%;
                     height: 10%;
                     width: 100%;
                     background-color: $colorBlack;
                     transform: scale(1) translate(0px, -50%);
+                    transition: all 0.5s ease-in-out;
                 }
             }
 
-            &__burger{
-                position: absolute;
-                background-color: $colorBg;
-                left: 0;
-                top: 114px;
-                width: 100%;
-                height: 100%;
-                overflow: scroll;
-            }
-
-            &__burger-body{
-                display: inline-flex;
-                flex-direction: column;
-                position: relative;
-            }
-
-            &__burger-title{
-                cursor: pointer;
-                position: relative;
-                padding-right: 5px;
-                font-size: 14px;
-                line-height: 90%;
-                color: $colorBlack;
-                font-weight: 400;
+            &__burger-icon.dis{
+                transition: all 0.5s ease-in-out;
+                &::after{
+                    transform: rotate(-45deg);
+                    bottom: 45%;
+                }
                 &::before{
-                    position: absolute;
-                    content: '';
-                    left: calc(40% + 6px);
-                    top: calc(50% - 2px);
-                    border: 4px solid transparent;
-                    border-top-color: #314C51;
-                    transform: translate(-50%);
+                    transform: rotate(45deg);
+                    top: 45%;
                 }
-            }
-
-            &__burger-plots{
-                position: absolute;
-                top: 38px;
-                left: 0;
-                li{
-                    white-space: nowrap;
-                    font-size: 12px;
-                    line-height: 90%;
-                    font-weight: 300;
-                    margin-top: 12px;
-                    &:nth-child(1){
-                        margin-top: 0px;
-                    }
-                }
-            }
-
-            &__burger-nav{
-                margin-top: 35px;
-                li{
-                    margin-top: 16px;
-                    &:nth-child(1){
-                        margin-top: 0px;
-                    }
-                }
-            }
-
-            &__burger-soc{
-                margin-top: 62px;
-                a{
-                    color: #3F3F3F;
-                    font-size: 20px;
-                    &:hover{
-                        color: $colorAdv;
-                    }
-                    &:nth-child(1){
-                        margin-right: 24px;
-                    }
-                }
-            }
-
-            &__burger-assistant{
-                margin-top: 24px;
-                h3{
-                    max-width: 160px;
-                    font-weight: 500;
-                    font-size: 10px;
-                    line-height: 12px;
-                }
-                .assistant-name{
-                    margin-top: 8px;
-                    font-weight: 300;
-                    font-size: 10px;
-                    line-height: 12px;
-                    color: #1D1F1D;
+                span{
+                    transform: scale(0);
                 }
             }
         }
+    }
+}
+
+.burger{
+    @media (max-width: $md3+px){
+        position: absolute;
+        background-color: $colorBg;
+        top: 114px;
+        width: 100%;
+        height: 100%;
+        overflow: scroll;
+        transition: all 0.3s ease-in-out;
+
+        &__body{
+            display: inline-flex;
+            flex-direction: column;
+            position: relative;
+            min-height: 100vh;
+        }
+    
+        &__title{
+            cursor: pointer;
+            position: relative;
+            font-size: 14px;
+            line-height: 90%;
+            color: $colorBlack;
+            font-weight: 400;
+            &::after{
+                position: absolute;
+                content: '';
+                left: calc(40% + 6px);
+                top: calc(50% - 2px);
+                border: 4px solid transparent;
+                border-top-color: #314C51;
+                transform: translate(-50%);
+            }
+        }
+    
+        &__plots{
+            margin-top: 19px;
+            li{
+                white-space: nowrap;
+                font-size: 12px;
+                line-height: 90%;
+                font-weight: 300;
+                margin-top: 12px;
+                &:nth-child(1){
+                    margin-top: 0px;
+                }
+            }
+        }
+    
+        &__nav{
+            margin-top: 16px;
+            li{
+                margin-top: 16px;
+                &:nth-child(1){
+                    margin-top: 0px;
+                }
+            }
+        }
+    
+        &__soc{
+            margin-top: 62px;
+            a{
+                color: #3F3F3F;
+                font-size: 20px;
+                &:hover{
+                    color: $colorAdv;
+                }
+                &:nth-child(1){
+                    margin-right: 24px;
+                }
+            }
+        }
+    
+        &__assistant{
+            margin-top: 24px;
+            h3{
+                max-width: 160px;
+                font-weight: 500;
+                font-size: 10px;
+                line-height: 12px;
+            }
+            .assistant-name{
+                margin-top: 8px;
+                font-weight: 300;
+                font-size: 10px;
+                line-height: 12px;
+                color: #1D1F1D;
+            }
+        }   
+    }
+    @keyframes burgerTransform {
+
     }
 }
 
@@ -275,6 +310,15 @@
     top: 0;
     z-index: 999;
     width: 100%;
+}
+
+.show-burg{
+    left: 0;
+}
+
+.hide-burg{
+    display: none;
+    left: -100%;
 }
 
 .hide{

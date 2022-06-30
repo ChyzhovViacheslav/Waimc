@@ -23,7 +23,7 @@ const tabs = document.querySelectorAll('.infstruct__list li'),
 
 //Заглушка 
 
-const addImg = () => {
+function addImg(){
     for(let i = document.querySelectorAll('.js').length; i < 13; i++){
         const img = document.createElement('img'),
               picture = document.createElement('picture'),
@@ -127,7 +127,6 @@ function stickyHeader(){
     }
 }
 
-
 wrapper.addEventListener('scroll', () => {
     stickyNav();
     stickyHeader();
@@ -135,54 +134,67 @@ wrapper.addEventListener('scroll', () => {
 
 //Burger
 
-const burgerPlots = document.querySelector('.header__burger-plots'),
-      burgerTitle = document.querySelector('.header__burger-title'),
-      burger = document.querySelector('.header__burger'),
+const burgerPlots = document.querySelector('.burger__plots'),
+      burgerTitle = document.querySelector('.burger__title'),
+      burger = document.querySelector('.burger'),
       burgerParent = document.querySelector('.header__side'),
       burgerBtn = document.querySelector('.header__burger-icon'),
-      dropDownParent = document.querySelector('.header__burger-body')
+      dropDownParent = document.querySelector('.burger__body'),
+      phone = document.querySelector('.header .icon-Phone')
 
-function burgerShow(el){
+function show(el){
     el.classList.add('show')
     el.classList.remove('hide')
 }
 
-function burgerHide(el){
+function hide(el){
     el.classList.add('hide')
     el.classList.remove('show')
 }
 
-function burgerListener(){
-    if(wrapper.clientWidth >= 769){
-        burgerHide(burger)
-        wrapper.style.overflowY = 'scroll'
-    }
+function showBurg(){
+    burger.classList.add('show-burg')
+    burger.classList.remove('hide-burg')
 }
 
-burgerParent.addEventListener('click', (event) => {
+function hideBurg(){
+    burger.classList.add('hide-burg')
+    burger.classList.remove('show-burg')
+}
+
+burgerParent.addEventListener('touchstart', (event) => {
     event.preventDefault()
     if(event.target === burgerBtn && burgerParent.contains(burgerBtn)){
-        if(burger.classList.contains('hide')){
-            burgerShow(burger)
+        if(burger.classList.contains('hide-burg')){
+            showBurg()
+            burgerBtn.classList.toggle('dis')
             wrapper.style.overflowY = 'hidden'
-        } else if(burger.classList.contains('show')){
-            burgerHide(burger)
+            phone.classList.toggle('close')
+        } else if(burger.classList.contains('show-burg')){
+            hideBurg()
+            burgerBtn.classList.toggle('dis')
             wrapper.style.overflowY = 'scroll'
+            phone.classList.toggle('close')
         }
     }
 })
 
-window.addEventListener('resize', burgerListener)
+window.addEventListener('resize', (event) => {
+    event.preventDefault()
+    if(wrapper.clientWidth >= 769){
+        hide(burger)
+    } else{
+        show(burger)
+    }
+})
 
-dropDownParent.addEventListener('click', (event) => {
+dropDownParent.addEventListener('touchstart', (event) => {
     event.preventDefault()
     if(event.target === burgerTitle && dropDownParent.contains(burgerTitle)){
         if(burgerPlots.classList.contains('hide')){
-            burgerShow(burgerPlots)
-            burgerTitle.style.marginBottom = `${burgerPlots.clientHeight + 38}px`
+            show(burgerPlots)
         } else if(burgerPlots.classList.contains('show')){
-            burgerHide(burgerPlots)
-            burgerTitle.style.marginBottom = '0px'
+            hide(burgerPlots)
         }
     }
 })
