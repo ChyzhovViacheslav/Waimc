@@ -1,8 +1,6 @@
 .header {
     position: relative;
     background-color: $colorBg;
-    &__container {
-    }
 
     &__body {
         display: flex;
@@ -69,7 +67,7 @@
         display: none;
     }
 
-    @media (max-width: $md3+px) {
+    @media (max-width: ($md3+px)) {
         .header{
             &__soc{
                 display: none;
@@ -83,7 +81,7 @@
                 transform: scale(1);
                 transition: all 0.3s ease-in-out;
                 }
-                .close{
+                .scale{
                     transform: scale(0);
                 }
             }
@@ -160,12 +158,13 @@
 }
 
 .burger{
-    @media (max-width: $md3+px){
-        position: absolute;
+    @media (max-width: ($md3+px)){
+        position: fixed;
         background-color: $colorBg;
         top: 114px;
         width: 100%;
         height: 100%;
+        z-index: 999;
         overflow: scroll;
         transition: all 0.3s ease-in-out;
 
@@ -173,7 +172,6 @@
             display: inline-flex;
             flex-direction: column;
             position: relative;
-            min-height: 100vh;
         }
     
         &__title{
@@ -196,6 +194,7 @@
     
         &__plots{
             margin-top: 19px;
+            height: 100%;
             li{
                 white-space: nowrap;
                 font-size: 12px;
@@ -256,12 +255,6 @@
 
 .second-header {
     background-color: $colorBg;
-    &__container {
-    }
-
-    &__body {
-    }
-
     &__list {
         padding: 18px 0px;
         display: flex;
@@ -285,7 +278,7 @@
         }
     }
 
-    @media (max-width: $md2+px) {
+    @media (max-width: ($md2+px)) {
         &__list{
             li{
                 margin: 0px 15px;
@@ -293,7 +286,7 @@
         }
     }
 
-    @media (max-width: $md3+px) {
+    @media (max-width: ($md3+px)) {
         display: none;
     }
 }
@@ -306,10 +299,15 @@
 }
 
 .sticky{
+    transition: all 0.3s ease-in-out;
     position: sticky;
-    top: 0;
+    top: 0px;
     z-index: 999;
     width: 100%;
+}
+
+.slow{
+    top: 0px;
 }
 
 .show-burg{

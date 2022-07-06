@@ -42,16 +42,20 @@ function addImg(){
     }
 }
 
-addImg()
+// addImg()
 
 // Tabs
 
-const tabContent = document.querySelectorAll('.js');
+const tabContent = document.querySelectorAll('.img'),
+      tabNext = document.querySelector('#tab-next'),
+      tabPrev = document.querySelector('#tab-prev'),
+      tabBtnParrent = document.querySelector('.infstruct__btns');
+
+let slideIndex = 1;
 
 function hideTabs(){
     tabContent.forEach(el => {
-        el.classList.add('hide');
-        el.classList.remove('show');
+        el.classList.remove('active');
     })
 
     tabs.forEach(el => {
@@ -60,22 +64,45 @@ function hideTabs(){
 }
 
 function showTabs(i = 0){
-    tabContent[i].classList.add('show');
-    tabContent[i].classList.remove('hide');
+    tabContent[i].classList.add('active');
     tabs[i].style.fontWeight = '500';
 }
 
 hideTabs();
 showTabs();
 
-parentTabs.addEventListener('click', (event) => {
-    if(event.target){
-        tabs.forEach((el, i) => {
-            if(event.target == el){
-                hideTabs()
-                showTabs(i)
-            }
-        })
+parentTabs.addEventListener('click', (e) => {
+    e.preventDefault()
+    
+    tabs.forEach((element, slideIndex) => {
+        if(e.target == element){
+            hideTabs()
+            showTabs(slideIndex)
+        }
+    })
+})
+
+tabNext.addEventListener('click', () => {
+    if(slideIndex > tabContent.length - 1){
+        hideTabs()
+        showTabs(slideIndex = 0)
+        showTabs(slideIndex++)
+    }else{
+        hideTabs()
+        console.log(slideIndex);
+        showTabs(slideIndex++)
+        console.log(slideIndex);
+    }
+})
+
+tabPrev.addEventListener('click', () => {
+    if((slideIndex + 1) == 0){
+        hideTabs()
+        showTabs(slideIndex = (tabContent.length - 1))
+        showTabs(slideIndex--)
+    }else{
+        hideTabs()
+        showTabs(slideIndex--)
     }
 })
 
@@ -91,6 +118,12 @@ const firstLine = document.createElement('div'),
       secondLine = document.createElement('div');
       firstLine.className = 'line'
       secondLine.className = 'line'
+
+function addSlow(el){
+    let stickyBlock = document.querySelector('.sticky')
+    stickyBlock.style.top = `-${el.clientHeight}px`
+    setTimeout(() => {el.classList.add('slow')}, 50)
+}
 
 function addLine(){
     navSecondHeaderBody.prepend(firstLine)
@@ -110,10 +143,10 @@ function changeLine(){
 }
 
 function stickyNav(){
-    if(wrapper.scrollTop >= 95){
+    if(wrapper.scrollTop >= navSecondHeader.clientHeight){
         navSecondHeader.classList.add('sticky')
         changeLine()
-    } else if(wrapper.scrollTop <= 94){
+    } else if(wrapper.scrollTop <= (navSecondHeader.clientHeight-1)){
         navSecondHeader.classList.remove('sticky')
         addLine()
     }
@@ -155,11 +188,17 @@ function hide(el){
 function showBurg(){
     burger.classList.add('show-burg')
     burger.classList.remove('hide-burg')
+    burgerBtn.classList.toggle('dis')
+    wrapper.style.overflowY = 'hidden'
+    phone.classList.toggle('scale')
 }
 
 function hideBurg(){
     burger.classList.add('hide-burg')
     burger.classList.remove('show-burg')
+    burgerBtn.classList.toggle('dis')
+    wrapper.style.overflowY = 'scroll'
+    phone.classList.toggle('scale')
 }
 
 burgerParent.addEventListener('touchstart', (event) => {
@@ -167,14 +206,8 @@ burgerParent.addEventListener('touchstart', (event) => {
     if(event.target === burgerBtn && burgerParent.contains(burgerBtn)){
         if(burger.classList.contains('hide-burg')){
             showBurg()
-            burgerBtn.classList.toggle('dis')
-            wrapper.style.overflowY = 'hidden'
-            phone.classList.toggle('close')
         } else if(burger.classList.contains('show-burg')){
             hideBurg()
-            burgerBtn.classList.toggle('dis')
-            wrapper.style.overflowY = 'scroll'
-            phone.classList.toggle('close')
         }
     }
 })
